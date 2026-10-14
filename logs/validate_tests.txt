@@ -1,0 +1,8 @@
+Python 3.12.3
+PASS 1. a las 09:00 no publica (faltan >3h)
+FAIL 2. Dia 8 publicado + comentario
+Traceback (most recent call last):
+  File "/home/runner/work/gains-labb-autopost/gains-labb-autopost/tests/run_tests.py", line 27, in <module>
+    check("2b. caption y video correctos", S["containers"]["c1"]["video_url"].endswith("videos/dia08_frecuencia.mp4") and "#trainingfrequency" in S["containers"]["c1"]["caption"])
+                                           ~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'c1'
