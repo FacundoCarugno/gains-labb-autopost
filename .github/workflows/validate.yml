@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Instalar ffmpeg (ffprobe valida los videos)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
       - name: Pruebas con Meta simulado
         run: |
           mkdir -p logs
