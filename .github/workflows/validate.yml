@@ -3,13 +3,24 @@ on:
   workflow_dispatch:
   push:
     paths: ["schedule.json", "autopost/**", "videos/**"]
+permissions:
+  contents: write
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Pruebas con Meta simulado
-        run: python3 tests/run_tests.py
+        run: |
+          mkdir -p logs
+          python3 --version | tee logs/validate_tests.txt
+          which ffprobe | tee -a logs/validate_tests.txt || echo "sin ffprobe" | tee -a logs/validate_tests.txt
+          set +e
+          python3 tests/run_tests.py 2>&1 | tee -a logs/validate_tests.txt
+          RC=${PIPESTATUS[0]}
+          git config user.name "gains-labb-bot"; git config user.email "bot@users.noreply.github.com"
+          git add -f logs/validate_tests.txt; git commit -q -m "log de validacion" && git pull --rebase -q && git push -q
+          exit $RC
       - name: Dry-run con los videos reales
         run: NOW_OVERRIDE=2026-10-14T19:01:00-03:00 PAGES_BASE_URL=https://example.invalid python3 autopost/publish.py --dry-run
       - name: Comprobar secretos y token (sin publicar)
