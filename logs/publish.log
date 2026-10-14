@@ -2,3 +2,10 @@
 2026-10-14T16:47:54-03:00 Dia 8 (previsto 2026-10-14) -> inicio
 2026-10-14T16:47:55-03:00 DRY-RUN ok: dia 8 video valido, caption 1108 caracteres, url https://FacundoCarugno.github.io/gains-labb-autopost/videos/dia08_frecuencia.mp4
 2026-10-14T16:47:55-03:00 URL publica https://FacundoCarugno.github.io/gains-labb-autopost/videos/dia08_frecuencia.mp4: OK (video accesible)
+2026-10-14T19:02:20-03:00 Dia 8 (previsto 2026-10-14) -> inicio
+2026-10-14T19:02:22-03:00 Contenedor creado 18143188975532364
+2026-10-14T19:02:22-03:00 dia 8: contenedor 18143188975532364 -> IN_PROGRESS
+2026-10-14T19:02:52-03:00 dia 8: contenedor 18143188975532364 -> IN_PROGRESS
+2026-10-14T19:03:22-03:00 dia 8: contenedor 18143188975532364 -> FINISHED
+2026-10-14T19:03:28-03:00 PUBLICADO dia 8 -> media 18121334857938444
+2026-10-14T19:03:29-03:00 Comentario publicado 18151838521496544. Fijado: no soportado por la API oficial (hacerlo a mano si se desea).
