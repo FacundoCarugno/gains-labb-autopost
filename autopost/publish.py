@@ -126,7 +126,12 @@ def main():
         err(cur, "caption", "caption vacio o >2200"); save(c); return 2
     if a.dry_run:
         log(f"DRY-RUN ok: dia {cur['day']} video valido, caption {len(cur['caption'])} caracteres, url {os.environ.get('PAGES_BASE_URL','(sin PAGES_BASE_URL)')}/{cur['video']}")
-        cur["attempts"] -= 1; return 0
+        cur["attempts"] -= 1
+        if os.environ.get("CHECK_URL"):
+            u = video_url(cur); bad = check_public(u)
+            log(f"URL publica {u}: " + ("OK (video accesible)" if not bad else "ERROR " + bad))
+            if bad: return 5
+        return 0
 
     tok, igid = os.environ.get("IG_ACCESS_TOKEN"), os.environ.get("IG_USER_ID")
     if not tok or not igid:
