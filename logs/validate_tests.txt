@@ -1,8 +1,20 @@
 Python 3.12.3
+/usr/bin/ffprobe
 PASS 1. a las 09:00 no publica (faltan >3h)
-FAIL 2. Dia 8 publicado + comentario
-Traceback (most recent call last):
-  File "/home/runner/work/gains-labb-autopost/gains-labb-autopost/tests/run_tests.py", line 27, in <module>
-    check("2b. caption y video correctos", S["containers"]["c1"]["video_url"].endswith("videos/dia08_frecuencia.mp4") and "#trainingfrequency" in S["containers"]["c1"]["caption"])
-                                           ~~~~~~~~~~~~~~~^^^^^^
-KeyError: 'c1'
+PASS 2. Dia 8 publicado + comentario
+PASS 2b. caption y video correctos
+PASS 2c. pin marcado no soportado (no simulado)
+PASS 3. segundo intento el mismo dia no duplica
+PASS 4. 15/10 publica Dia 9
+PASS 5. fallo -> dia 8 no queda publicado, error registrado, rc!=0
+PASS 5b. reintento publica una sola vez
+PASS 6. corte tras publish: quedo 'publishing'
+PASS 6b. reintento detecta Reel existente, no duplica
+PASS 7. falta video dia 8: rc!=0, nada publicado, dia 9 no se usa
+PASS 8. video corrupto rechazado
+PASS 9. token invalido: error registrado, no publica
+PASS 10. 13/10 (antes del inicio) no publica
+PASS 10b. si se perdio un dia, publica el Dia 8 atrasado (no salta a 10)
+PASS 11. dry-run valida video real (ffprobe) sin llamar a la API
+PASS 12. los 5 videos reales pasan la validacion []
+FALLOS: 0
