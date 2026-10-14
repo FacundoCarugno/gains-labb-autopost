@@ -2,7 +2,7 @@ name: Validar configuracion
 on:
   workflow_dispatch:
   push:
-    paths: ["schedule.json", "autopost/**", "videos/**"]
+    paths: ["schedule.json", "autopost/**", "videos/**", ".github/**"]
 permissions:
   contents: write
 jobs:
