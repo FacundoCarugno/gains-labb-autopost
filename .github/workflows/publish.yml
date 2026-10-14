@@ -1,0 +1,53 @@
+name: Publicar Reel diario
+on:
+  schedule:
+    - cron: "40 21 * * *"   # 18:40 ART (21:40 UTC): el script espera hasta las 19:00 ART
+    - cron: "30 22 * * *"   # respaldo 19:30 ART: idempotente, no duplica
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Solo validar (no publica)"
+        type: boolean
+        default: true
+      force:
+        description: "Ignorar la espera de las 19:00"
+        type: boolean
+        default: false
+concurrency:
+  group: publish
+  cancel-in-progress: false
+permissions:
+  contents: write
+  issues: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publicar
+        id: pub
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          PAGES_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: |
+          ARGS=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
+            [ "${{ inputs.force }}" = "true" ] && ARGS="$ARGS --force"
+          fi
+          python3 autopost/publish.py $ARGS
+      - name: Guardar registro
+        if: always()
+        run: |
+          git config user.name "gains-labb-bot"; git config user.email "bot@users.noreply.github.com"
+          git add schedule.json logs/ || true
+          git diff --cached --quiet || (git commit -m "registro de publicacion $(date -u +%F)" && git pull --rebase -q && git push)
+      - name: Avisar por fallo (issue => email al dueno)
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --title "Fallo publicacion automatica $(date -u +%F)" \
+            --body "El workflow fallo. Revisa schedule.json (errors) y los logs: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" || true

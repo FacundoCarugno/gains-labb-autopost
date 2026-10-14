@@ -1,0 +1,25 @@
+name: Validar configuracion
+on:
+  workflow_dispatch:
+  push:
+    paths: ["schedule.json", "autopost/**", "videos/**"]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pruebas con Meta simulado
+        run: python3 tests/run_tests.py
+      - name: Dry-run con los videos reales
+        run: NOW_OVERRIDE=2026-10-14T19:01:00-03:00 PAGES_BASE_URL=https://example.invalid python3 autopost/publish.py --dry-run
+      - name: Comprobar secretos y token (sin publicar)
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          python3 - <<'PY'
+          import os,sys; sys.path.insert(0,"autopost"); from igapi import IG
+          t,i=os.environ.get("IG_ACCESS_TOKEN"),os.environ.get("IG_USER_ID")
+          if not t or not i: print("FALTAN secretos IG_ACCESS_TOKEN / IG_USER_ID"); sys.exit(1)
+          print("Cuenta:", IG(t,i).whoami())
+          PY
