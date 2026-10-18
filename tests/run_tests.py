@@ -6,7 +6,7 @@ sys.path.insert(0, HERE); import mock_meta
 PORT = 8765; srv = mock_meta.serve(PORT); S = mock_meta.S
 def mk():
     d = tempfile.mkdtemp(); shutil.copytree(os.path.join(REPO, "autopost"), d + "/autopost", ignore=shutil.ignore_patterns("__pycache__"))
-    shutil.copy(REPO + "/schedule.json", d); os.symlink(REPO + "/videos", d + "/videos"); return d
+    shutil.copy(REPO + "/tests/fixture_schedule.json", d + "/schedule.json"); os.symlink(REPO + "/videos", d + "/videos"); return d
 def run(d, now, token="GOOD", extra=(), env=None):
     e = dict(os.environ, IG_ACCESS_TOKEN=token, IG_USER_ID="123", IG_API_BASE=f"http://127.0.0.1:{PORT}",
              PAGES_BASE_URL=f"http://127.0.0.1:{PORT}", NOW_OVERRIDE=now, SKIP_WAIT="1", POLL_SECONDS="0", **(env or {}))

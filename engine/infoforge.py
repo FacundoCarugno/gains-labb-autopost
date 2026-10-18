@@ -181,12 +181,13 @@ def put_icon(img, name, cx, cy, size, color, scale=1.0):
     img.paste(ip, (int(cx - sz / 2), int(cy - sz / 2)), ip)
 
 def tracker(d, day):
+    start = 1 if day <= 12 else day - 6
     for i in range(12):
-        x = 210 + i * 60; y = 190
-        if i + 1 < day: d.ellipse([x - 11, y - 11, x + 11, y + 11], fill=LIME)
-        elif i + 1 == day:
+        n = start + i; x = 210 + i * 60; y = 190
+        if n < day: d.ellipse([x - 11, y - 11, x + 11, y + 11], fill=LIME)
+        elif n == day:
             d.ellipse([x - 19, y - 19, x + 19, y + 19], fill=ORANGE, outline=CREAM, width=3)
-            txt(d, (x, y), str(day), get_font(20), (20, 14, 12))
+            txt(d, (x, y), str(day), get_font(20 if day < 100 else 15), (20, 14, 12))
         else: d.ellipse([x - 8, y - 8, x + 8, y + 8], fill=(66, 54, 60))
 
 def confetti(d, lt, cx, cy, t0=1.3, dur=1.5):
@@ -788,6 +789,8 @@ if __name__ == "__main__":
     a = ap.parse_args()
     import reels_more
     REELS.update(reels_more.REELS_MORE)
+    import reels_more2
+    REELS.update(reels_more2.REELS_MORE2)
     reel = REELS[a.day](a.handle)
     v = Voice(a.model_dir, a.sid, a.speed, os.path.join(a.out, "cache"))
     render(reel, a.handle, v, a.out, f"fit_{reel['id']:03d}_{reel['topic']}_en")
