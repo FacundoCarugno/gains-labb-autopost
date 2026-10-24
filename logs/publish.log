@@ -80,3 +80,10 @@
 2026-10-23T19:05:09-03:00 PUBLICADO dia 17 -> media 17950456944345191
 2026-10-23T19:05:10-03:00 Comentario publicado 18112325276169194. Fijado: no soportado por la API oficial (hacerlo a mano si se desea).
 2026-10-23T19:58:01-03:00 Ya se publico un Reel hoy (2026-10-23); no se publica otro.
+2026-10-24T18:58:52-03:00 Esperando 68s hasta las 19:00 ART
+2026-10-24T19:00:00-03:00 Dia 18 (previsto 2026-10-24) -> inicio
+2026-10-24T19:00:02-03:00 Contenedor creado 18146472553532364
+2026-10-24T19:00:03-03:00 dia 18: contenedor 18146472553532364 -> IN_PROGRESS
+2026-10-24T19:00:33-03:00 dia 18: contenedor 18146472553532364 -> FINISHED
+2026-10-24T19:00:40-03:00 PUBLICADO dia 18 -> media 17897891727674598
+2026-10-24T19:00:42-03:00 Comentario publicado 18136848346641102. Fijado: no soportado por la API oficial (hacerlo a mano si se desea).
