@@ -793,6 +793,8 @@ if __name__ == "__main__":
     REELS.update(reels_more2.REELS_MORE2)
     import reels_more3
     REELS.update(reels_more3.REELS_MORE3)
+    import reels_more4
+    REELS.update(reels_more4.REELS_MORE4)
     reel = REELS[a.day](a.handle)
     v = Voice(a.model_dir, a.sid, a.speed, os.path.join(a.out, "cache"))
     render(reel, a.handle, v, a.out, f"fit_{reel['id']:03d}_{reel['topic']}_en")
