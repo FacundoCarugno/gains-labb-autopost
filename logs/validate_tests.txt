@@ -1,4 +1,4 @@
-Python 3.12.3
+Python 3.14.4
 /usr/bin/ffprobe
 PASS 1. a las 09:00 no publica (faltan >3h)
 PASS 2. Dia 8 publicado + comentario
