@@ -257,3 +257,9 @@
 2026-11-17T01:43:32-03:00 Faltan 17.3 h para las 19:00; salgo.
 2026-11-18T00:15:25-03:00 Faltan 18.7 h para las 19:00; salgo.
 2026-11-18T00:48:34-03:00 Faltan 18.2 h para las 19:00; salgo.
+2026-11-18T21:09:53-03:00 Dia 41 (previsto 2026-11-16, ATRASADO) -> inicio
+2026-11-18T21:09:54-03:00 Contenedor creado 18153914470532364
+2026-11-18T21:09:54-03:00 dia 41: contenedor 18153914470532364 -> IN_PROGRESS
+2026-11-18T21:10:25-03:00 dia 41: contenedor 18153914470532364 -> FINISHED
+2026-11-18T21:10:31-03:00 PUBLICADO dia 41 -> media 18421240762080522
+2026-11-18T21:10:33-03:00 Comentario publicado 18110602631252642. Fijado: no soportado por la API oficial (hacerlo a mano si se desea).
