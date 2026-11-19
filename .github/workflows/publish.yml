@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: "40 21 * * *"   # 18:40 ART (21:40 UTC): el script espera hasta las 19:00 ART
     - cron: "30 22 * * *"   # respaldo 19:30 ART: idempotente, no duplica
+    # GitHub a veces atrasa o descarta corridas programadas (visto 14-18/11/2026): mas respaldos, todos idempotentes
+    - cron: "0 20 * * *"    # 17:00 ART (espera hasta las 19:00)
+    - cron: "0 23 * * *"    # 20:00 ART
+    - cron: "30 0 * * *"    # 21:30 ART
+    - cron: "30 1 * * *"    # 22:30 ART
   workflow_dispatch:
     inputs:
       dry_run:
