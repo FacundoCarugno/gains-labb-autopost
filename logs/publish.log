@@ -301,3 +301,10 @@
 2026-11-21T23:51:30-03:00 Ya se publico un Reel hoy (2026-11-21); no se publica otro.
 2026-11-22T04:16:59-03:00 Faltan 14.7 h para las 19:00; salgo.
 2026-11-22T05:40:03-03:00 Faltan 13.3 h para las 19:00; salgo.
+2026-11-22T21:40:26-03:00 Dia 45 (previsto 2026-11-20, ATRASADO) -> inicio
+2026-11-22T21:40:27-03:00 Contenedor creado 18154759465532364
+2026-11-22T21:40:28-03:00 dia 45: contenedor 18154759465532364 -> IN_PROGRESS
+2026-11-22T21:40:58-03:00 dia 45: contenedor 18154759465532364 -> IN_PROGRESS
+2026-11-22T21:41:28-03:00 dia 45: contenedor 18154759465532364 -> FINISHED
+2026-11-22T21:41:34-03:00 PUBLICADO dia 45 -> media 18142144831626519
+2026-11-22T21:41:35-03:00 Comentario publicado 18007764339007988. Fijado: no soportado por la API oficial (hacerlo a mano si se desea).
