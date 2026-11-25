@@ -17,4 +17,8 @@ PASS 10. 13/10 (antes del inicio) no publica
 PASS 10b. si se perdio un dia, publica el Dia 8 atrasado (no salta a 10)
 PASS 11. dry-run valida video real (ffprobe) sin llamar a la API
 PASS 12. los 5 videos reales pasan la validacion []
+PASS 13. madrugada del 15 recupera la ventana del 14 (Dia 8)
+PASS 13b. otra corrida de madrugada no duplica
+PASS 13c. a las 19:00 del 15 publica Dia 9
+PASS 13d. madrugada del 16 con Dia 9 ya publicado el 15 no duplica
 FALLOS: 0
