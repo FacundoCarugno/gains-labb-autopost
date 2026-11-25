@@ -69,4 +69,14 @@ check("11. dry-run valida video real (ffprobe) sin llamar a la API", rc == 0 and
 sys.path.insert(0, REPO + "/autopost"); import publish
 bad = [(x["day"], publish.validate_video(x)) for x in json.load(open(REPO + "/schedule.json"))["days"] if publish.validate_video(x)]
 check(f"12. los 5 videos reales pasan la validacion {bad}", not bad)
+# 13 recuperacion: corrida de madrugada publica la ventana perdida; no duplica; a las 19:00 sigue el dia siguiente
+reset(); d = mk(); rc, c = run(d, "2026-10-15T02:00:00-03:00")
+check("13. madrugada del 15 recupera la ventana del 14 (Dia 8)", day(c, 8)["publish_status"] == "published" and len(S["media"]) == 1)
+rc, c = run(d, "2026-10-15T05:00:00-03:00")
+check("13b. otra corrida de madrugada no duplica", len(S["media"]) == 1 and day(c, 9)["publish_status"] == "pending")
+rc, c = run(d, "2026-10-15T19:05:00-03:00")
+check("13c. a las 19:00 del 15 publica Dia 9", day(c, 9)["publish_status"] == "published" and len(S["media"]) == 2)
+rc, c = run(d, "2026-10-16T01:00:00-03:00")
+check("13d. madrugada del 16 con Dia 9 ya publicado el 15 no duplica", len(S["media"]) == 2 and day(c, 10)["publish_status"] == "pending")
+
 print("FALLOS:", ok); sys.exit(1 if ok else 0)

@@ -102,18 +102,27 @@ def main():
     cur = next((d for d in days if d["publish_status"] != "published"), None)
     if cur is None:
         log("Calendario completo: no hay dias pendientes. Faltan contenidos (Dia 13+)."); return 0
-    if any(d["publish_status"] == "published" and d.get("published_date") == today for d in days):
-        log(f"Ya se publico un Reel hoy ({today}); no se publica otro."); return 0
     if cur["planned_date"] > today:
         log(f"Dia {cur['day']} esta previsto para {cur['planned_date']}; hoy es {today}. Nada que hacer."); return 0
     late = cur["planned_date"] < today
-    # espera hasta las 19:00 ART
-    target = dt.datetime.combine(n.date(), dt.time(19, 0), TZ)
-    if n < target and not a.force:
-        wait = (target - n).total_seconds()
-        if wait > 3 * 3600: log(f"Faltan {wait/3600:.1f} h para las 19:00; salgo."); return 0
-        log(f"Esperando {wait:.0f}s hasta las 19:00 ART"); 
-        if not a.dry_run and not os.environ.get("SKIP_WAIT"): time.sleep(wait)
+    # Un Reel por "ventana": cada ventana arranca a las 19:00 ART. GitHub atrasa o descarta corridas programadas
+    # (visto 14-25/11/2026: solo corria de madrugada), asi que una corrida de madrugada RECUPERA la ventana
+    # anterior si no se publico nada desde las 19:00 de ayer, en lugar de irse y saltar el dia.
+    slot = dt.datetime.combine(n.date(), dt.time(19, 0), TZ)
+    if n < slot and not a.force:
+        wait = (slot - n).total_seconds()
+        if wait <= 3 * 3600:
+            log(f"Esperando {wait:.0f}s hasta las 19:00 ART")
+            if not a.dry_run and not os.environ.get("SKIP_WAIT"): time.sleep(wait)
+        else:
+            slot -= dt.timedelta(days=1)
+            if cur["planned_date"] > slot.date().isoformat():
+                log(f"Dia {cur['day']} esta previsto para {cur['planned_date']}; nada que recuperar de la ventana anterior."); return 0
+            log(f"Antes de las 19:00: se revisa la ventana anterior ({slot.isoformat(timespec='minutes')}).")
+    if not a.force:
+        for d in days:
+            if d["publish_status"] == "published" and d.get("published_at") and dt.datetime.fromisoformat(d["published_at"]) >= slot:
+                log(f"Ya se publico un Reel en esta ventana (dia {d['day']}, {d['published_at']}); no se publica otro."); return 0
     log(f"Dia {cur['day']} (previsto {cur['planned_date']}{', ATRASADO' if late else ''}) -> inicio")
     cur["attempts"] += 1
 
