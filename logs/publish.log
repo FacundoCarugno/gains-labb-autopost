@@ -351,3 +351,5 @@
 2026-11-26T23:46:09-03:00 dia 47: contenedor 18155626708532364 -> FINISHED
 2026-11-26T23:46:15-03:00 PUBLICADO dia 47 -> media 17968972901984708
 2026-11-26T23:46:16-03:00 Comentario publicado 17902254402610388. Fijado: no soportado por la API oficial (hacerlo a mano si se desea).
+2026-11-27T00:45:48-03:00 Antes de las 19:00: se revisa la ventana anterior (2026-11-26T19:00-03:00).
+2026-11-27T00:45:48-03:00 Ya se publico un Reel en esta ventana (dia 47, 2026-11-26T23:46:15-03:00); no se publica otro.
