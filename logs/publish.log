@@ -361,3 +361,10 @@
 2026-11-27T05:56:48-03:00 Ya se publico un Reel en esta ventana (dia 47, 2026-11-26T23:46:15-03:00); no se publica otro.
 2026-11-27T07:02:01-03:00 Antes de las 19:00: se revisa la ventana anterior (2026-11-26T19:00-03:00).
 2026-11-27T07:02:01-03:00 Ya se publico un Reel en esta ventana (dia 47, 2026-11-26T23:46:15-03:00); no se publica otro.
+2026-11-27T23:34:00-03:00 Dia 48 (previsto 2026-11-23, ATRASADO) -> inicio
+2026-11-27T23:34:02-03:00 Contenedor creado 18155812888532364
+2026-11-27T23:34:02-03:00 dia 48: contenedor 18155812888532364 -> IN_PROGRESS
+2026-11-27T23:34:32-03:00 dia 48: contenedor 18155812888532364 -> IN_PROGRESS
+2026-11-27T23:35:03-03:00 dia 48: contenedor 18155812888532364 -> FINISHED
+2026-11-27T23:35:09-03:00 PUBLICADO dia 48 -> media 17971307349208998
+2026-11-27T23:35:10-03:00 Comentario publicado 18020854988958668. Fijado: no soportado por la API oficial (hacerlo a mano si se desea).
